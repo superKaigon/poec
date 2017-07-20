@@ -19,73 +19,173 @@ public class TestApplication { //  -> algorithme
 	 */
 	public static void main(String[] args) { // -> DEBUT
 		
-		int taillej1 = 10;
-		// Tableau à une dimension
-		int[] joueur1 = new int[TAILLE_J1];
-		// Tableau à une dimension
-		int[][] joueur2 = new int[20][10];
+		Scanner lire = new Scanner (System.in);
+		int JOUEUR1 = 0;
+		int JOUEUR2 = 5;
+		int JOUEUR3 = 10;
+		int DEGAT = 0;
+		int PAU = 1;
+		int ARMURE = 2;
+		int PV = 3;
+		int PA = 4;
+		int EQUIPE = 1;
+		int OUT = -1;
+		int NBJOUEUR = 3;
+		int NBATTRIBUT = 5;
 
-		
-		//POUR devient for
-		for (int i = 0; i < joueur1.length; i++) {
-			joueur1[i] = i;
+
+		int[] joueurs = new int [NBATTRIBUT*NBJOUEUR];
+		int ii;
+		int jj;
+		int choix;
+		int adversaire;
+		int paCourant;
+		boolean process = true;
+
+		jj = 0;
+		for (ii = 0; ii < NBATTRIBUT*NBJOUEUR; ii += NBATTRIBUT) {
+			jj = jj + 1;
+
+			do {
+				System.out.println("Choix arme perso " + jj);
+				System.out.println("1 concasseur");
+				System.out.println("2 pelle");
+				System.out.println("3 gatling");
+				System.out.println("4 batte de cricket");
+				System.out.println("5 blaster");
+
+				choix = lire.nextInt();
+
+			}while(choix < 1 || choix > 5);
+			switch (choix ) {
+				case 1 :
+						joueurs[ii+DEGAT] = 3;
+						joueurs[ii+PAU] = 4;
+						break;
+				case 2 :
+						joueurs[ii+DEGAT] = 2;
+						joueurs[ii+PAU] = 1;
+						break;
+				case 3 :
+						joueurs[ii+DEGAT] = 10;
+						joueurs[ii+PAU] = 6;
+						break;
+				case 4 :
+						joueurs[ii+DEGAT] = 1;
+						joueurs[ii+PAU] = 1;
+						break;
+				case 5 :
+						joueurs[ii+DEGAT] = 6;
+						joueurs[ii+PAU] = 3;
+						break;
 			}
-		for (int i = 0; i < joueur1.length; i++) {
-			System.out.print(joueur1[i]);		
+			choix = OUT;
+
+			do {
+				System.out.println("Choix armure perso " + jj);
+				System.out.println("0 aucune armue");
+				System.out.println("1 gil&& bleu");
+				System.out.println("2 armure de cuir");
+				System.out.println("3 armure de plaque");
+
+				choix = lire.nextInt();
+
+			}while(choix < 0 || choix > 3);
+			switch (choix) {
+				case 0 :
+						joueurs[ii+ARMURE] = 0;
+						break;
+				case 1 :
+						joueurs[ii+ARMURE] = 1;
+						break;
+				case 2 :
+						joueurs[ii+ARMURE] = 2;
+						break;
+				case 3 :
+						joueurs[ii+ARMURE] = 4;
+						break;
+				default :
+						break;
 			}
-		
-		System.out.println();
-		
-		for (int i = joueur1.length - 1; i >= 0; i--) {
-			System.out.print(joueur1[i]);
-			}
-		
-		System.out.println();
-		
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 10; j++) {
-				joueur2[i][j] = i * j;
-				System.out.print(joueur2[i][j] + " ");
-			}
-			System.out.println();
 			
+			
+			choix = OUT;
+
+			do {
+				System.out.println("Choix PV perso " + jj);
+
+				choix = lire.nextInt();
+			} while(choix < 0 || choix > 20);
+			joueurs[ii+PV] = choix;
+	
+			choix = OUT;
+
+			do {
+				System.out.println("Choix PA perso " + jj);
+
+				choix = lire.nextInt();
+			}
+
+			while(choix < 0 || choix > 20); 
+			joueurs[ii+PA] = choix;
+			choix = OUT;
 		}
+			
 		
-		System.out.println();
-		
-		boolean flag = true;
-		int k = 0;
-		// boucle TANTQUE
-		while(flag) {
-			System.out.println("Coucou " + k);
-			if (k == 10) {
-				flag = false;
-			} 
-			k = k + 1; // k++
-		}
-		k = 0;
-		flag = true;
-		// boucle FAIRE TANTQUE
-		do {
-			System.out.println("Coucou2 " + k);
-		if (k == 10) {
-			flag = false;
-		}
-		k = k + 1;
-		}while(flag);
-		
-		// boucle SELON 
-		switch (k) {
-		case 10 : 
-			System.out.println("k10 = " + k);
-			break;
-		case 9 : 
-			System.out.println("k9 = " + k);
-			break;
-		default:
-			System.out.println("k = " + k);
-			break;
+
+		while (process) {
+			for (ii = 0; ii < (NBATTRIBUT*NBJOUEUR); ii += NBATTRIBUT) {
+				if (joueurs[ii+PV] > 0) {
+					adversaire = OUT;
+				
+					jj = ii;
+					do {
+						jj = jj + NBATTRIBUT;
+						if(jj > (NBATTRIBUT*NBJOUEUR)) {
+							jj = 0;
+						}
+					}while (joueurs[jj+PV] <= 0 && jj != ii);
+
+					if (jj != ii) {
+							adversaire = jj;						
+					}
+					if (adversaire != OUT) {
+						paCourant = joueurs[ii+PA];
+						paCourant = paCourant - 1;
+						while (((paCourant - joueurs[ii+PAU]) >= 0) && process) {
+							if (joueurs[adversaire+PV] > 0) {
+								if ((joueurs[adversaire+ARMURE] - joueurs[ii+DEGAT]) < 0 ) {
+									joueurs[adversaire+PV] = joueurs[adversaire+PV] + joueurs[adversaire+ARMURE] - joueurs[ii+DEGAT];
+								}	
+								paCourant = paCourant - joueurs[ii+PAU];
+								}else {
+									adversaire = OUT;
+								}
+								
+									jj = ii;
+									do {
+										jj = jj + NBATTRIBUT;
+										if(jj >= (NBATTRIBUT*NBJOUEUR)) {
+										jj = 0;
+										}
+									}while (joueurs[jj+PV] >= 0 && jj != ii);
+				
+									if (jj != ii) {
+										adversaire = jj;
+												}						
+									if (adversaire == OUT) {
+										process = false;
+									}
+						}
+					}else {
+							System.out.println("Fini !");
+							process = false;
+					}
+				}
+			}
 		}
 	}
 }
+					
+
 // -> FIN
