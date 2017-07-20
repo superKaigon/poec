@@ -21,31 +21,27 @@ public class TestApplication { //  -> algorithme
 	 * @param args
 	 */
 	public static void main(String[] args) { // -> DEBUT
-		
-		int jasmine = 7;
-		int aladin = 5;
-		int panierCommun = jasmine + aladin;
-		
-		Scanner lire = new Scanner(System.in);
-		System.out.print("nombre de pomme pour Jasmine ");
-		jasmine = lire.nextInt();
-		System.out.print("nombre de pomme pour Aladin ");
-		aladin = lire.nextInt();
-		panierCommun = jasmine + aladin;
-		lire.close();
-		
-		// Algo : Ecrire()
-		System.out.print("Le total est " + panierCommun);
-		
-		// Test conditionnel : 
-		// OU : ||
-		// ET : &&
-		// NON() : !()
-		// EGAL : ==
-		
-		if (jasmine ==3) {
-			
+			Scanner lire = new Scanner (System.in);
+			int chiffre1;
+			int chiffre2;
+			int result;
+			System.out.println("Choississez un entier");
+			chiffre1 = lire.nextInt();
+			System.out.println("Choississez un entier");
+			chiffre2 = lire.nextInt();
+			if (chiffre1 == chiffre2 ) {
+				result = chiffre1 + chiffre2;
+				System.out.println(result);				
+			}else if ((chiffre1 < 0) && (chiffre2 >= 0)) {
+				result = chiffre1 * chiffre2;
+				System.out.println(result);
+			}else if (
+					((chiffre1 < 0) && (chiffre2 < 0))||((chiffre1 < 0) && (chiffre2 < 0)) && 
+					((chiffre1 <= -10)||(chiffre2 <= -10)||(chiffre1 >= 10)||(chiffre2 >= 10))){
+				result = chiffre1 / chiffre2;
+				System.out.println(result);
 		}
 
 	}
-}// -> FIN
+}
+// -> FIN
