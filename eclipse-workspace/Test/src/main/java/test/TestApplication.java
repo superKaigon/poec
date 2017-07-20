@@ -36,6 +36,16 @@ public class TestApplication { //  -> algorithme
 		
 		// Algo : Ecrire()
 		System.out.print("Le total est " + panierCommun);
+		
+		// Test conditionnel : 
+		// OU : ||
+		// ET : &&
+		// NON() : !()
+		// EGAL : ==
+		
+		if (jasmine ==3) {
+			
+		}
 
 	}
 }// -> FIN
