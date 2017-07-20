@@ -29,19 +29,23 @@ public class TestApplication { //  -> algorithme
 			chiffre1 = lire.nextInt();
 			System.out.println("Choississez un entier");
 			chiffre2 = lire.nextInt();
+			lire.close();
 			if (chiffre1 == chiffre2 ) {
 				result = chiffre1 + chiffre2;
-				System.out.println(result);				
+				System.out.println("Egalité chiffre1 et chiffre2 " + result);				
 			}else if ((chiffre1 < 0) && (chiffre2 >= 0)) {
 				result = chiffre1 * chiffre2;
-				System.out.println(result);
+				System.out.println("Chiffre1 négatif et chiffre2 positif " + result);
 			}else if (
-					((chiffre1 < 0) && (chiffre2 < 0))||((chiffre1 < 0) && (chiffre2 < 0)) && 
+					((chiffre1 < 0) && (chiffre2 < 0))||((chiffre1 > 0) && (chiffre2 > 0)) && 
 					((chiffre1 <= -10)||(chiffre2 <= -10)||(chiffre1 >= 10)||(chiffre2 >= 10))){
 				result = chiffre1 / chiffre2;
-				System.out.println(result);
-		}
+				System.out.println("Condition trop longue désolé, mais le résultat est la division de chiffre1 et chiffre2 " + result);
+			}else {
+				System.out.println("non testé");
+			}
 
 	}
+	
 }
 // -> FIN
