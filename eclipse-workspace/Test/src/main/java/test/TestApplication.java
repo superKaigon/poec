@@ -9,86 +9,55 @@ import java.util.Scanner;
  * @author ludov
  *
  */
-public class TestApplication { //  -> algorithme
+public class TestApplication { // > algorithme
 
-
-	
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) { // -> DEBUT
-		
-		Scanner lire = new Scanner (System.in);
-		int rep;
-		int bac[] = {1, 2, 3, 4};
-		int concasseur[] = {1, 2};
-		int grain[] = {10, 25, 12};
-		while (true) {
-			do {
-				System.out.println("Sélectionnez votre boisson : \n"
-						+ "1 : café \n"
-						+ "2 : café long \n"
-						+ "3 : café vanille \n"
-						+ "4 : cappucino \n"
-						+ "5 : chocolat \n"
-						+ "6 : chococolat caramel \n"
-						+ "7 : moca \n"
-						+ "8 : thé");
-				rep = lire.nextInt();
-			}while (rep < 1 || rep >8);
-			System.out.println("Votre boisson est en préparation");
-			switch (rep) {
-			case 1 : 
-				System.out.println("Bac n° " + bac[0] + " sélectionné");
-				System.out.println("Concasseur n° " + concasseur[0] + " sélectionné");
-				System.out.println(grain[0] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre café est prêt");			
-				break;
-			case 2 : 
-				System.out.println("Bac n° " + bac[0] + " sélectionné");
-				System.out.println("Concasseur n° " + concasseur[0] + " sélectionné");
-				System.out.println(grain[1] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre café long est prêt");	
-				break;
-			case 3 : 
-				System.out.println("Bac n° " + bac[0] + " sélectionné");
-				System.out.println("Concasseur n° " + concasseur[0] + " sélectionné");
-				System.out.println(grain[0] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre café vanille est prêt");	
-				break;
-			case 4 : 
-				System.out.println("Bac n° " + bac[0] + " sélectionné");
-				System.out.println("Concasseur n° " + concasseur[0] + " sélectionné");
-				System.out.println(grain[1] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre cappucino est prêt");	
-				break;
-			case 5 : 
-				System.out.println("Bac n° " + bac[1] + " sélectionné");
-				System.out.println("Concasseur n° " + concasseur[0] + " sélectionné");
-				System.out.println(grain[1] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre chocolat est prêt");	
-				break;
-			case 6 : 
-				System.out.println("Bac n° " + bac[1] + " sélectionné");
-				System.out.println("Concasseur n° " + concasseur[0] + " sélectionné");
-				System.out.println(grain[0] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre chocolat caramel est prêt");
-				break;
-			case 7 : 
-				System.out.println("Bac n° " + bac[2] + " sélectionné");
-				System.out.println("Concasseur n° " + concasseur[1] + " sélectionné");
-				System.out.println(grain[1] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre moca est prêt");
-				break;
-			case 8 : 
-				System.out.println("Bac n° " + bac[3] + " sélectionné");
-				System.out.println(grain[2] + " unités de grain moulu sont utilisés");
-				System.out.println("Votre thé est prêt");
-				break;
+	public static void main(String[] args) { // > DEBUT
+		int cle;
+		String message;
+		char tab[];
+		int i;
+		Scanner lire = new Scanner(System.in);
+		System.out.println("Tapez le message que vous voulez crypté");
+		message = lire.nextLine();
+		// System.out.println("Tapez votre clé de cryptage");
+		cle = CallIntMessage(lire, 0, 90000, "Tapez votre clé de cryptage");
+		tab = message.toCharArray();
+		int codeMessage[] = new int[message.length()];
+		for (i = 0; i < (message.length()); i++) {
+			codeMessage[i] = (int) tab[i] * (int) tab[i] - (int) tab[i] + cle;
+			System.out.println(codeMessage[i]);
+		}
+		for (i = 0; i < codeMessage.length; i++) {
+			//System.out.println(codeMessage[i]);
+			for (int j = 0; j < 128; j++) {				
+				if ((j * j - j + cle) == codeMessage[i]) {
+					
+					System.out.print((char)j);
+				}
 			}
 		}
+		//System.out.println(messageDecode[i]);
 	}
-}
-					
 
-// -> FIN
+	public static int CallIntMessage(Scanner scan, int valMin, int valMax, String message) {
+
+		int result;
+		do {
+			System.out.println(message);
+			while (!scan.hasNextInt())
+				scan.next();
+			while (!scan.hasNextInt())
+				scan.next();
+
+			result = scan.nextInt();
+		} while (result > valMax || result < valMin);
+
+		return result;
+	}
+
+}
+
+// > FIN
